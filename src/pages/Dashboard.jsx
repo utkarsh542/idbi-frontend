@@ -67,7 +67,7 @@ const Dashboard = ({ customerId }) => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
+      <div className="responsive-grid-2-1">
         <div className="glass-panel" style={{ height: '400px' }}>
           <h3 style={{ marginBottom: '24px' }}>Spending Trend (6 Months)</h3>
           <ResponsiveContainer width="100%" height="100%">

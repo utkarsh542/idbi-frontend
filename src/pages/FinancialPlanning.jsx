@@ -97,7 +97,7 @@ const FinancialPlanning = () => {
         })}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+      <div className="responsive-grid-1-1">
         <div className="glass-panel">
           <h3 style={{ marginBottom: '24px' }}>Goal Parameters ({currentDefaults.years} Years)</h3>
           
