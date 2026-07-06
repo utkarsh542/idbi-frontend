@@ -1,16 +1,40 @@
-# React + Vite
+# IDBI WealthAI - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, IDBI-themed WealthAI dashboard built for Relationship Managers. This React application provides a premium corporate interface featuring a voice-enabled AI financial coach, interactive financial planning tools, and real-time customer analytics.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **IDBI Corporate Theme**: Meticulously designed UI matching the official IDBI Bank brand language (Teal & Orange palette, custom SVG vectors).
+- **Voice-Enabled AI Coach**: A 3D-styled AI Assistant chat widget integrated with the Web Speech API for seamless voice-to-text functionality.
+- **Dynamic Dashboard**: View interactive customer portfolios, health scores, and spending analytics.
+- **Financial Planning**: Dynamic goal tracking and visualizations tailored for high-net-worth individuals.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React + Vite
+- **Styling**: Vanilla CSS with CSS Variables for theme management
+- **Icons**: Lucide React
+- **Routing**: React Router DOM
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Prerequisites
+
+- Node.js (v18+)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to the provided `localhost` URL.
+
+---
+*Developed for the IDBI WealthAI Project.*
