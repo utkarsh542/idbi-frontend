@@ -143,43 +143,49 @@ const FinancialPlanning = () => {
           </div>
         </div>
 
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Investment Required</h3>
+        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px', textAlign: 'center' }}>Recommended Strategy</h3>
           
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', margin: '24px 0' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Monthly SIP</div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: 'var(--idbi-teal)' }}>
-                ₹{calculateSIP().toLocaleString('en-IN')}
-              </div>
+          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Total Monthly Investment Required</div>
+            <div style={{ fontSize: '40px', fontWeight: '700', color: 'var(--idbi-teal)' }}>
+              ₹{calculateSIP().toLocaleString('en-IN')}
             </div>
-            
-            <div style={{ width: '1px', backgroundColor: 'var(--border-color)' }}></div>
-            
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>One-Time Lumpsum</div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: 'var(--idbi-orange)' }}>
-                ₹{Math.round((corpus * Math.pow((1 + inflation / 100), currentDefaults.years)) / Math.pow(1 + returns/100, currentDefaults.years)).toLocaleString('en-IN')}
-              </div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>
+              To reach ₹{Math.round(corpus * Math.pow((1 + inflation / 100), currentDefaults.years)).toLocaleString('en-IN')} in {currentDefaults.years} years
             </div>
           </div>
 
-          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', maxWidth: '90%', lineHeight: '1.5', fontSize: '14px' }}>
-            To reach your inflation-adjusted target of ₹{Math.round(corpus * Math.pow((1 + inflation / 100), currentDefaults.years)).toLocaleString('en-IN')} in {currentDefaults.years} years, you can either start a Monthly SIP or make a One-Time Lumpsum investment today.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
-            <button 
-              onClick={() => setSipStarted(true)}
-              style={{ padding: '12px 24px', background: 'var(--idbi-teal)', border: 'none', borderRadius: '8px', color: 'white', fontWeight: '600', cursor: 'pointer' }}
-            >
-              {sipStarted ? 'SIP Initiated!' : 'Start SIP'}
-            </button>
-            <button 
-              style={{ padding: '12px 24px', background: 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '8px', color: 'var(--idbi-orange)', fontWeight: '600', cursor: 'pointer' }}
-            >
-              Invest Lumpsum
-            </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1 }}>
+            {/* Mutual Funds */}
+            <div style={{ padding: '16px', border: '1px solid rgba(0, 133, 117, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(0, 133, 117, 0.03)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>IDBI Mutual Funds (60%)</div>
+                <div style={{ fontWeight: '700', color: 'var(--idbi-teal)' }}>₹{Math.round(calculateSIP() * 0.6).toLocaleString('en-IN')}</div>
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Aggressive equity allocation for high growth to beat inflation.</p>
+              <button style={{ width: '100%', padding: '8px', background: 'var(--idbi-teal)', border: 'none', borderRadius: '6px', color: 'white', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Start MF SIP</button>
+            </div>
+
+            {/* Corporate Bonds */}
+            <div style={{ padding: '16px', border: '1px solid rgba(244, 121, 32, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(244, 121, 32, 0.03)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Corporate Bonds (20%)</div>
+                <div style={{ fontWeight: '700', color: 'var(--idbi-orange)' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Fixed income to reduce volatility and secure steady returns.</p>
+              <button style={{ width: '100%', padding: '8px', background: 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '6px', color: 'var(--idbi-orange)', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Explore Bonds</button>
+            </div>
+
+            {/* Digital Gold */}
+            <div style={{ padding: '16px', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '12px', backgroundColor: 'rgba(234, 179, 8, 0.03)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Digital Gold (20%)</div>
+                <div style={{ fontWeight: '700', color: '#ca8a04' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Safe-haven asset acting as a natural hedge against market crashes.</p>
+              <button style={{ width: '100%', padding: '8px', background: 'transparent', border: '1px solid #ca8a04', borderRadius: '6px', color: '#ca8a04', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Buy Digital Gold</button>
+            </div>
           </div>
         </div>
       </div>
