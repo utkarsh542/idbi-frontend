@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageSquare, X, Send, AlertCircle, Mic } from 'lucide-react';
-import { getChatHistory, sendChatMessage } from '../lib/api';
+import { MessageSquare, X, Send, AlertCircle, Mic, RotateCcw } from 'lucide-react';
+import { getChatHistory, sendChatMessage, clearChatHistory } from '../lib/api';
 
 const ChatWidget = ({ customerId }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +16,15 @@ const ChatWidget = ({ customerId }) => {
       loadHistory();
     }
   }, [isOpen, customerId]);
+
+  const handleNewChat = async () => {
+    try {
+      await clearChatHistory(customerId);
+      setMessages([]);
+    } catch (error) {
+      console.error('Failed to clear chat history', error);
+    }
+  };
 
   const loadHistory = async () => {
     try {
@@ -131,10 +140,16 @@ const ChatWidget = ({ customerId }) => {
               </g>
             </svg>
           </div>
-          <div>
-            <h3 style={{ fontSize: '16px', margin: 0 }}>AI Financial Coach</h3>
+          <div style={{ flex: 1 }}>
+            <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '16px' }}>AI Financial Coach</h3>
             <span style={{ fontSize: '12px', color: 'var(--accent-green)' }}>Online</span>
           </div>
+          <button onClick={handleNewChat} title="New Chat" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: '4px' }}>
+            <RotateCcw size={18} />
+          </button>
+          <button onClick={() => setIsOpen(false)} title="Close" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: '4px' }}>
+            <X size={20} />
+          </button>
         </div>
 
         <div className="chat-widget-messages">
