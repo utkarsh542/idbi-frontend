@@ -86,7 +86,7 @@ const Layout = ({ customerId, setCustomerId }) => {
           <li>
             <NavLink to="/health" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
               <Activity size={20} />
-              Health Score
+              Wealth Health Score
             </NavLink>
           </li>
         </ul>

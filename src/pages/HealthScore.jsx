@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Activity, ShieldCheck, TrendingUp, AlertTriangle, CheckCircle2, ChevronRight } from 'lucide-react';
+import { Activity, ShieldCheck, TrendingUp, AlertTriangle, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 import { getCustomerMetrics } from '../lib/api';
 
 const CircularProgress = ({ score, color }) => {
@@ -90,7 +90,7 @@ const HealthScore = ({ customerId }) => {
   return (
     <div>
       <div className="page-header" style={{ marginBottom: '40px' }}>
-        <h1 className="page-title text-gradient">Financial Health Score</h1>
+        <h1 className="page-title text-gradient">Wealth Health Score</h1>
         <p className="page-subtitle">A deep dive into your financial well-being based on your portfolio, emergency funds, and spending trends.</p>
       </div>
 
@@ -226,6 +226,48 @@ const HealthScore = ({ customerId }) => {
                <p style={{ color: 'var(--text-secondary)', fontSize: '14px', lineHeight: '1.6' }}>Your financial basics are perfectly covered. With a strong health score, you can afford to focus on long-term aggressive wealth creation.</p>
              </div>
           )}
+        </div>
+      </div>
+
+      {/* Recommended IDBI Wealth Products */}
+      <div className="glass-panel" style={{ padding: '32px', marginTop: '32px' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', fontSize: '20px' }}>
+          <div style={{ padding: '8px', background: 'rgba(0, 133, 117, 0.1)', borderRadius: '8px' }}>
+            <Sparkles size={20} color="var(--idbi-teal)" />
+          </div>
+          Recommended IDBI Wealth Products
+        </h3>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+          Based on your Wealth Health Score and risk profile, our AI suggests the following curated IDBI investment avenues to optimize your portfolio:
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+          
+          <div style={{ padding: '20px', border: '1px solid var(--border-color)', borderRadius: '12px', background: '#fff' }}>
+            <h4 style={{ color: 'var(--idbi-teal)', marginBottom: '8px', fontWeight: '600' }}>Systematic Investment Plan (SIP)</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5' }}>Automate your wealth creation with IDBI flexi-cap SIPs for long-term compound growth.</p>
+          </div>
+          
+          <div style={{ padding: '20px', border: '1px solid var(--border-color)', borderRadius: '12px', background: '#fff' }}>
+            <h4 style={{ color: 'var(--idbi-teal)', marginBottom: '8px', fontWeight: '600' }}>Mutual Funds (MF)</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5' }}>Diversify across equity and debt markets with top-rated IDBI Mutual Funds.</p>
+          </div>
+
+          <div style={{ padding: '20px', border: '1px solid var(--border-color)', borderRadius: '12px', background: '#fff' }}>
+            <h4 style={{ color: 'var(--idbi-teal)', marginBottom: '8px', fontWeight: '600' }}>Digital Gold</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5' }}>Hedge against inflation securely with 24K pure digital gold straight from your account.</p>
+          </div>
+
+          <div style={{ padding: '20px', border: '1px solid var(--border-color)', borderRadius: '12px', background: '#fff' }}>
+            <h4 style={{ color: 'var(--idbi-teal)', marginBottom: '8px', fontWeight: '600' }}>ETFs</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5' }}>Low-cost, passive investing solutions tracking major market indices efficiently.</p>
+          </div>
+
+          <div style={{ padding: '20px', border: '1px solid var(--border-color)', borderRadius: '12px', background: '#fff' }}>
+            <h4 style={{ color: 'var(--idbi-teal)', marginBottom: '8px', fontWeight: '600' }}>Corporate & Govt Bonds</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5' }}>Secure steady, fixed-income returns to safely build your emergency corpus.</p>
+          </div>
+
         </div>
       </div>
 

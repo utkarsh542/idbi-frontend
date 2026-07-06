@@ -144,25 +144,43 @@ const FinancialPlanning = () => {
         </div>
 
         <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Monthly SIP Required</h3>
-          <div style={{ fontSize: '56px', fontWeight: '700', color: 'var(--idbi-teal)', marginBottom: '16px' }}>
-            ₹{calculateSIP().toLocaleString('en-IN')}
-          </div>
-          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', maxWidth: '80%', lineHeight: '1.5' }}>
-            Based on your parameters, investing this amount monthly will help you reach your inflation-adjusted target corpus of ₹{Math.round(corpus * Math.pow((1 + inflation / 100), currentDefaults.years)).toLocaleString('en-IN')} in {currentDefaults.years} years.
-          </p>
-          {sipStarted ? (
-            <div style={{ marginTop: '24px', padding: '14px 28px', backgroundColor: 'rgba(0, 255, 100, 0.1)', border: '1px solid var(--accent-green)', borderRadius: '8px', color: 'var(--accent-green)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Shield size={20} /> SIP Successfully Initiated!
+          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Investment Required</h3>
+          
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', margin: '24px 0' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Monthly SIP</div>
+              <div style={{ fontSize: '32px', fontWeight: '700', color: 'var(--idbi-teal)' }}>
+                ₹{calculateSIP().toLocaleString('en-IN')}
+              </div>
             </div>
-          ) : (
+            
+            <div style={{ width: '1px', backgroundColor: 'var(--border-color)' }}></div>
+            
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>One-Time Lumpsum</div>
+              <div style={{ fontSize: '32px', fontWeight: '700', color: 'var(--idbi-orange)' }}>
+                ₹{Math.round((corpus * Math.pow((1 + inflation / 100), currentDefaults.years)) / Math.pow(1 + returns/100, currentDefaults.years)).toLocaleString('en-IN')}
+              </div>
+            </div>
+          </div>
+
+          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', maxWidth: '90%', lineHeight: '1.5', fontSize: '14px' }}>
+            To reach your inflation-adjusted target of ₹{Math.round(corpus * Math.pow((1 + inflation / 100), currentDefaults.years)).toLocaleString('en-IN')} in {currentDefaults.years} years, you can either start a Monthly SIP or make a One-Time Lumpsum investment today.
+          </p>
+          
+          <div style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
             <button 
               onClick={() => setSipStarted(true)}
-              style={{ marginTop: '24px', padding: '14px 28px', background: 'linear-gradient(90deg, var(--idbi-teal), var(--idbi-orange))', border: 'none', borderRadius: '8px', color: 'white', fontWeight: '600', cursor: 'pointer', transition: 'opacity 0.2s ease' }}
+              style={{ padding: '12px 24px', background: 'var(--idbi-teal)', border: 'none', borderRadius: '8px', color: 'white', fontWeight: '600', cursor: 'pointer' }}
             >
-              Start SIP Now
+              {sipStarted ? 'SIP Initiated!' : 'Start SIP'}
             </button>
-          )}
+            <button 
+              style={{ padding: '12px 24px', background: 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '8px', color: 'var(--idbi-orange)', fontWeight: '600', cursor: 'pointer' }}
+            >
+              Invest Lumpsum
+            </button>
+          </div>
         </div>
       </div>
     </div>

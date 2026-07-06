@@ -90,29 +90,49 @@ const Dashboard = ({ customerId }) => {
         </div>
 
         <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-          <h3 style={{ marginBottom: '24px' }}>Health Score Portfolio</h3>
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="health-score-circle">
-              <div className="health-score-content">
-                <div className="health-score-value">
-                  {/* Mock health score calculation based on savings rate */}
-                  {Math.min(100, Math.round((metrics.savings_rate / 30) * 100))}
+          <h3 style={{ marginBottom: '24px' }}>Asset Allocation</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto', flex: 1 }}>
+            {Object.entries(metrics.asset_allocation || {})
+              .filter(([_, val]) => val > 0)
+              .sort((a, b) => b[1] - a[1])
+              .map(([key, val]) => (
+              <div key={key}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', textTransform: 'capitalize' }}>
+                  <span style={{ color: 'var(--text-primary)' }}>{key.replace('_', ' ')}</span>
+                  <span style={{ color: 'var(--idbi-teal)', fontWeight: '600' }}>{val}%</span>
                 </div>
-                <div className="health-score-label">
-                  {metrics.savings_rate >= 20 ? 'Excellent' : 'Fair'}
+                <div className="progress-bar-bg" style={{ height: '6px' }}>
+                  <div className="progress-bar-fill" style={{ width: `${val}%`, backgroundColor: 'var(--idbi-teal)' }}></div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-          <div style={{ marginTop: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ color: 'var(--text-secondary)' }}>Savings Health</span>
-              <span style={{ color: 'var(--accent-green)' }}>{metrics.savings_rate}%</span>
+        </div>
+      </div>
+
+      {/* Detailed Bills Section */}
+      <div className="glass-panel" style={{ marginTop: '24px' }}>
+        <h3 style={{ marginBottom: '24px' }}>Personal Expenses & Bills</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+          {metrics.monthly_expenses?.detailed_bills?.map((bill, idx) => (
+            <div key={idx} style={{ 
+              padding: '16px', 
+              borderRadius: '12px', 
+              backgroundColor: bill.essential ? 'rgba(0, 133, 117, 0.05)' : 'rgba(244, 121, 32, 0.05)',
+              border: `1px solid ${bill.essential ? 'rgba(0, 133, 117, 0.2)' : 'rgba(244, 121, 32, 0.2)'}`
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <h4 style={{ margin: 0, color: 'var(--text-primary)' }}>{bill.name}</h4>
+                <span style={{ fontWeight: '600', color: bill.essential ? 'var(--idbi-teal)' : 'var(--idbi-orange)' }}>₹{bill.amount.toLocaleString()}</span>
+              </div>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                {bill.category} • {bill.essential ? 'Essential' : 'Discretionary / Highlight'}
+              </div>
             </div>
-            <div className="progress-bar-bg">
-              <div className="progress-bar-fill" style={{ width: `${Math.min(100, (metrics.savings_rate / 30) * 100)}%` }}></div>
-            </div>
-          </div>
+          ))}
+          {(!metrics.monthly_expenses?.detailed_bills || metrics.monthly_expenses.detailed_bills.length === 0) && (
+            <div style={{ color: 'var(--text-secondary)' }}>No detailed bills found for this profile.</div>
+          )}
         </div>
       </div>
     </div>
@@ -122,7 +142,11 @@ const Dashboard = ({ customerId }) => {
 // Helper function
 function sumObjectValues(obj) {
   if (!obj) return 0;
-  return Object.values(obj).reduce((a, b) => a + b, 0);
+  let total = 0;
+  for (const key in obj) {
+    if (typeof obj[key] === 'number') total += obj[key];
+  }
+  return total;
 }
 
 export default Dashboard;
