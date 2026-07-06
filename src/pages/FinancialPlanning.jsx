@@ -147,81 +147,82 @@ const FinancialPlanning = () => {
           </div>
         </div>
 
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px', textAlign: 'center' }}>Recommended Strategy</h3>
+        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h3 style={{ color: 'var(--text-secondary)', marginBottom: '16px', textAlign: 'center' }}>Investment Required</h3>
           
-          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Total Monthly Investment Required</div>
-            <div style={{ fontSize: '40px', fontWeight: '700', color: 'var(--idbi-teal)' }}>
+          <div style={{ textAlign: 'center', margin: 'auto 0' }}>
+            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Total Monthly Investment</div>
+            <div style={{ fontSize: '56px', fontWeight: '700', color: 'var(--idbi-teal)' }}>
               ₹{calculateSIP().toLocaleString('en-IN')}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>
+            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '8px' }}>
               To reach ₹{Math.round(corpus * Math.pow((1 + inflation / 100), currentDefaults.years)).toLocaleString('en-IN')} in {currentDefaults.years} years
             </div>
           </div>
+        </div>
+      </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1, maxHeight: '500px', overflowY: 'auto', paddingRight: '8px' }}>
+      <h3 style={{ marginTop: '40px', marginBottom: '24px', fontSize: '20px', color: 'var(--text-primary)' }}>Recommended IDBI Portfolio Mix</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '40px' }}>
             {/* SIP */}
-            <div style={{ padding: '16px', border: '1px solid rgba(0, 133, 117, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(0, 133, 117, 0.03)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Systematic Investment Plan (30%)</div>
-                <div style={{ fontWeight: '700', color: 'var(--idbi-teal)' }}>₹{Math.round(calculateSIP() * 0.3).toLocaleString('en-IN')}</div>
+            <div style={{ padding: '24px', border: '1px solid rgba(0, 133, 117, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(0, 133, 117, 0.03)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>SIP (30%)</div>
+                <div style={{ fontWeight: '700', color: 'var(--idbi-teal)', fontSize: '18px' }}>₹{Math.round(calculateSIP() * 0.3).toLocaleString('en-IN')}</div>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Disciplined monthly investing for compounding growth.</p>
-              <button onClick={() => setSipStarted(true)} style={{ width: '100%', padding: '8px', background: sipStarted ? 'rgba(0, 133, 117, 0.2)' : 'var(--idbi-teal)', border: sipStarted ? '1px solid var(--idbi-teal)' : 'none', borderRadius: '6px', color: sipStarted ? 'var(--idbi-teal)' : 'white', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.4', flex: 1 }}>Disciplined monthly investing for compounding growth.</p>
+              <button onClick={() => setSipStarted(true)} style={{ width: '100%', padding: '10px', background: sipStarted ? 'rgba(0, 133, 117, 0.2)' : 'var(--idbi-teal)', border: sipStarted ? '1px solid var(--idbi-teal)' : 'none', borderRadius: '8px', color: sipStarted ? 'var(--idbi-teal)' : 'white', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
                 {sipStarted ? '✓ SIP Active' : 'Start SIP'}
               </button>
             </div>
 
             {/* Mutual Funds */}
-            <div style={{ padding: '16px', border: '1px solid rgba(0, 133, 117, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(0, 133, 117, 0.03)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>IDBI Mutual Funds (20%)</div>
-                <div style={{ fontWeight: '700', color: 'var(--idbi-teal)' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
+            <div style={{ padding: '24px', border: '1px solid rgba(0, 133, 117, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(0, 133, 117, 0.03)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Mutual Funds (20%)</div>
+                <div style={{ fontWeight: '700', color: 'var(--idbi-teal)', fontSize: '18px' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Active fund management for alpha generation.</p>
-              <button onClick={() => setMfStarted(true)} style={{ width: '100%', padding: '8px', background: mfStarted ? 'rgba(0, 133, 117, 0.2)' : 'transparent', border: '1px solid var(--idbi-teal)', borderRadius: '6px', color: mfStarted ? 'var(--idbi-teal)' : 'var(--idbi-teal)', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.4', flex: 1 }}>Active fund management for alpha generation.</p>
+              <button onClick={() => setMfStarted(true)} style={{ width: '100%', padding: '10px', background: mfStarted ? 'rgba(0, 133, 117, 0.2)' : 'transparent', border: '1px solid var(--idbi-teal)', borderRadius: '8px', color: mfStarted ? 'var(--idbi-teal)' : 'var(--idbi-teal)', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
                 {mfStarted ? '✓ MF Invested' : 'Invest in MF'}
               </button>
             </div>
 
             {/* ETFs */}
-            <div style={{ padding: '16px', border: '1px solid rgba(139, 92, 246, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(139, 92, 246, 0.03)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <div style={{ padding: '24px', border: '1px solid rgba(139, 92, 246, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(139, 92, 246, 0.03)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Index ETFs (20%)</div>
-                <div style={{ fontWeight: '700', color: '#8b5cf6' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
+                <div style={{ fontWeight: '700', color: '#8b5cf6', fontSize: '18px' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Low-cost passive investing tracking market indices.</p>
-              <button onClick={() => setEtfStarted(true)} style={{ width: '100%', padding: '8px', background: etfStarted ? 'rgba(139, 92, 246, 0.2)' : 'transparent', border: '1px solid #8b5cf6', borderRadius: '6px', color: '#8b5cf6', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.4', flex: 1 }}>Low-cost passive investing tracking market indices.</p>
+              <button onClick={() => setEtfStarted(true)} style={{ width: '100%', padding: '10px', background: etfStarted ? 'rgba(139, 92, 246, 0.2)' : 'transparent', border: '1px solid #8b5cf6', borderRadius: '8px', color: '#8b5cf6', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
                 {etfStarted ? '✓ ETF Purchased' : 'Buy ETFs'}
               </button>
             </div>
 
             {/* Corporate Bonds */}
-            <div style={{ padding: '16px', border: '1px solid rgba(244, 121, 32, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(244, 121, 32, 0.03)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Corporate Bonds (15%)</div>
-                <div style={{ fontWeight: '700', color: 'var(--idbi-orange)' }}>₹{Math.round(calculateSIP() * 0.15).toLocaleString('en-IN')}</div>
+            <div style={{ padding: '24px', border: '1px solid rgba(244, 121, 32, 0.2)', borderRadius: '12px', backgroundColor: 'rgba(244, 121, 32, 0.03)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Bonds (15%)</div>
+                <div style={{ fontWeight: '700', color: 'var(--idbi-orange)', fontSize: '18px' }}>₹{Math.round(calculateSIP() * 0.15).toLocaleString('en-IN')}</div>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Fixed income to reduce volatility and secure steady returns.</p>
-              <button onClick={() => setBondsStarted(true)} style={{ width: '100%', padding: '8px', background: bondsStarted ? 'rgba(244, 121, 32, 0.2)' : 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '6px', color: 'var(--idbi-orange)', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.4', flex: 1 }}>Fixed income to reduce volatility and secure steady returns.</p>
+              <button onClick={() => setBondsStarted(true)} style={{ width: '100%', padding: '10px', background: bondsStarted ? 'rgba(244, 121, 32, 0.2)' : 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '8px', color: 'var(--idbi-orange)', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
                 {bondsStarted ? '✓ Bonds Explored' : 'Explore Bonds'}
               </button>
             </div>
 
             {/* Digital Gold */}
-            <div style={{ padding: '16px', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '12px', backgroundColor: 'rgba(234, 179, 8, 0.03)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <div style={{ padding: '24px', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '12px', backgroundColor: 'rgba(234, 179, 8, 0.03)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Digital Gold (15%)</div>
-                <div style={{ fontWeight: '700', color: '#ca8a04' }}>₹{Math.round(calculateSIP() * 0.15).toLocaleString('en-IN')}</div>
+                <div style={{ fontWeight: '700', color: '#ca8a04', fontSize: '18px' }}>₹{Math.round(calculateSIP() * 0.15).toLocaleString('en-IN')}</div>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Safe-haven asset acting as a natural hedge against market crashes.</p>
-              <button onClick={() => setGoldStarted(true)} style={{ width: '100%', padding: '8px', background: goldStarted ? 'rgba(234, 179, 8, 0.2)' : 'transparent', border: '1px solid #ca8a04', borderRadius: '6px', color: '#ca8a04', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.4', flex: 1 }}>Safe-haven asset acting as a natural hedge against crashes.</p>
+              <button onClick={() => setGoldStarted(true)} style={{ width: '100%', padding: '10px', background: goldStarted ? 'rgba(234, 179, 8, 0.2)' : 'transparent', border: '1px solid #ca8a04', borderRadius: '8px', color: '#ca8a04', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
                 {goldStarted ? '✓ Gold Purchased' : 'Buy Digital Gold'}
               </button>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );
