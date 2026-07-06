@@ -12,7 +12,9 @@ const goalDefaults = {
 
 const FinancialPlanning = () => {
   const [activeGoalTitle, setActiveGoalTitle] = useState('Buy House');
-  const [sipStarted, setSipStarted] = useState(false);
+  const [mfStarted, setMfStarted] = useState(false);
+  const [bondsStarted, setBondsStarted] = useState(false);
+  const [goldStarted, setGoldStarted] = useState(false);
   
   const [corpus, setCorpus] = useState(goalDefaults['Buy House'].corpus);
   const [inflation, setInflation] = useState(6);
@@ -164,7 +166,12 @@ const FinancialPlanning = () => {
                 <div style={{ fontWeight: '700', color: 'var(--idbi-teal)' }}>₹{Math.round(calculateSIP() * 0.6).toLocaleString('en-IN')}</div>
               </div>
               <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Aggressive equity allocation for high growth to beat inflation.</p>
-              <button style={{ width: '100%', padding: '8px', background: 'var(--idbi-teal)', border: 'none', borderRadius: '6px', color: 'white', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Start MF SIP</button>
+              <button 
+                onClick={() => setMfStarted(true)}
+                style={{ width: '100%', padding: '8px', background: mfStarted ? 'rgba(0, 133, 117, 0.2)' : 'var(--idbi-teal)', border: mfStarted ? '1px solid var(--idbi-teal)' : 'none', borderRadius: '6px', color: mfStarted ? 'var(--idbi-teal)' : 'white', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                {mfStarted ? '✓ MF SIP Started' : 'Start MF SIP'}
+              </button>
             </div>
 
             {/* Corporate Bonds */}
@@ -174,7 +181,12 @@ const FinancialPlanning = () => {
                 <div style={{ fontWeight: '700', color: 'var(--idbi-orange)' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
               </div>
               <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Fixed income to reduce volatility and secure steady returns.</p>
-              <button style={{ width: '100%', padding: '8px', background: 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '6px', color: 'var(--idbi-orange)', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Explore Bonds</button>
+              <button 
+                onClick={() => setBondsStarted(true)}
+                style={{ width: '100%', padding: '8px', background: bondsStarted ? 'rgba(244, 121, 32, 0.2)' : 'transparent', border: '1px solid var(--idbi-orange)', borderRadius: '6px', color: 'var(--idbi-orange)', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                {bondsStarted ? '✓ Bonds Explored' : 'Explore Bonds'}
+              </button>
             </div>
 
             {/* Digital Gold */}
@@ -184,7 +196,12 @@ const FinancialPlanning = () => {
                 <div style={{ fontWeight: '700', color: '#ca8a04' }}>₹{Math.round(calculateSIP() * 0.2).toLocaleString('en-IN')}</div>
               </div>
               <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>Safe-haven asset acting as a natural hedge against market crashes.</p>
-              <button style={{ width: '100%', padding: '8px', background: 'transparent', border: '1px solid #ca8a04', borderRadius: '6px', color: '#ca8a04', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Buy Digital Gold</button>
+              <button 
+                onClick={() => setGoldStarted(true)}
+                style={{ width: '100%', padding: '8px', background: goldStarted ? 'rgba(234, 179, 8, 0.2)' : 'transparent', border: '1px solid #ca8a04', borderRadius: '6px', color: '#ca8a04', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                {goldStarted ? '✓ Gold Purchased' : 'Buy Digital Gold'}
+              </button>
             </div>
           </div>
         </div>
